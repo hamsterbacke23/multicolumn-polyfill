@@ -62,15 +62,17 @@
           } else {
             columnCount = self.options.columnCount;
           }
-          // calculate vars
-          var perColumnItemCount  = Math.floor( $children.length / columnCount ),
-              containerWidth = $el.parent().outerWidth() - (parseInt(listPaddingLeft, 10) + parseInt(listPaddingRight,10)),
-              columnWidth = (containerWidth - (gapWidth * (columnCount - 1))) / columnCount;
 
+          // check column number
           if(!columnCount || columnCount < 2) {
             self.destroy($el);
             return;
           }
+
+          // calculate vars
+          var perColumnItemCount  = Math.floor( $children.length / columnCount ),
+              containerWidth = $el.parent().outerWidth() - (parseInt(listPaddingLeft, 10) + parseInt(listPaddingRight,10)),
+              columnWidth = (containerWidth - (gapWidth * (columnCount - 1))) / columnCount;
 
           if(self.options.mode == 'relative') {
             columnWidth = (columnWidth / containerWidth * 100) + '%';
@@ -137,7 +139,7 @@
       },
 
       waitForFinalEvent : function (func, timeout) {
-        var timeoutID , timeout = timeout || 200;
+        var timeoutID , timeout = timeout || 500;
         return function () {
           var scope = this , args = arguments;
           clearTimeout(timeoutID);
