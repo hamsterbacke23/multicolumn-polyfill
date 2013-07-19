@@ -5,7 +5,7 @@ Use it with Modernizr.
 
 ## How does it work?
 - Gets all children of an element
-- Distributes them on new floating elements
+- Distributes them on new floating "column" elements
 - Hides the original
 - Responsive behaviour: On resize, checks if column number changes
 
