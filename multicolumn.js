@@ -1,5 +1,5 @@
 /**
- * CSS3 multicolumn polyfill for IE9, IE8
+ * CSS3 multicolumn polyfill for list elements for IE9, IE8
  *
  * usage example:
  *  if (!Modernizr.csscolumns) {
@@ -100,9 +100,12 @@
             var lists = $wrapper.clone();
 
             // fill each column with list elements
-            for (var i = 1; i <= columnCount; i++) {
-              var $listItems = $children.filter(':lt(' + perColumnItemCount + ')').clone();
+            for (var i = 0; i < columnCount; i++) {
               var columnMargin = i > 1 ? gapWidth : 0;
+              var $listItems = $children.clone();
+              var fromCount = parseInt((perColumnItemCount * i), 10);
+              var toCount = parseInt((fromCount + perColumnItemCount), 10);
+              $listItems = $listItems.slice(fromCount, toCount);
 
               $list = $('<' + tagName + '/>')
                 .css({
