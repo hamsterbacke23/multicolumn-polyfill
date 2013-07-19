@@ -22,7 +22,7 @@
             wrapperClass : 'column-wrapper',
             hiddenClass : 'mc-hidden',
             mode: 'relative',
-            childTag: 'li'
+            childSelector: false
           };
 
       function Plugin( element, options ) {
@@ -56,7 +56,7 @@
                 listPaddingLeft = $el.css('padding-left'),
                 listPaddingBottom = $el.css('padding-bottom'),
                 listPaddingTop = $el.css('padding-top'),
-                $children = $el.children(self.options.childTag);
+                $children = $el.children(self.options.childSelector);
 
             // get column Count
             var columnCount;
