@@ -101,7 +101,7 @@
 
             // fill each column with list elements
             for (var i = 0; i < columnCount; i++) {
-              var columnMargin = i > 1 ? gapWidth : 0;
+              var columnMargin = i > 0 ? gapWidth : 0;
               var $listItems = $children.clone();
               var fromCount = parseInt((perColumnItemCount * i), 10);
               var toCount = parseInt((fromCount + perColumnItemCount), 10);
@@ -122,7 +122,7 @@
               lists.append($list.append($listItems));
             };
 
-            //insert new element, remove old
+            //insert new element, hide old
             $el.after(lists).hide().addClass(self.options.hiddenClass);
           });
         },
