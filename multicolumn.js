@@ -1,5 +1,5 @@
 /**
- * CSS3 multicolumn polyfill for list elements for IE9, IE8
+ * CSS3 multicolumn polyfill for list elements for IE9, IE8, partly IE7
  *
  * usage example:
  *  if (!Modernizr.csscolumns) {
@@ -29,15 +29,19 @@
      this.init();
   }
   Plugin.prototype = {
+
     init : function() {
       this.doColumns();
       this.setResizeHandler();
     },
+
     doColumns : function($el) {
       var self = this;
       var $vel = typeof $el == 'undefined' ? this.element : $el;
+
       $vel.each(function() {
         var $el = $(this);
+
         // get column Count
         var columnCount;
         if(self.options.columnCount === 'auto') {
@@ -45,11 +49,13 @@
         } else {
           columnCount = self.options.columnCount;
         }
+
         // check columns
         if(!columnCount || columnCount < 2) {
           self.destroy($el);
           return;
         }
+
         var gapWidth = self.options.columnGap,
           tagName = $el.prop('tagName'),
           classes = $el.attr('class'),
@@ -62,10 +68,12 @@
           listPaddingBottom = $el.css('padding-bottom'),
           listPaddingTop = $el.css('padding-top'),
           $children = $el.children(self.options.childSelector);
+
         // calculate vars
         var perColumnItemCount  = Math.floor( $children.length / columnCount ),
           containerWidth = $el.parent().outerWidth() - (parseInt(listPaddingLeft, 10) + parseInt(listPaddingRight,10)),
           columnWidth = (containerWidth - (gapWidth * (columnCount - 1))) / columnCount;
+
         if(self.options.mode == 'relative') {
           columnWidth = (columnWidth / containerWidth * 100) + '%';
           gapWidth = (gapWidth / containerWidth * 100) + '%';
@@ -73,6 +81,7 @@
           containerWidth = Math.floor(containerWidth);
           columnWidth = Math.floor(columnWidth);
         }
+
         // define wrapper element
         $wrapper = $('<div class="clearfix ' + self.options.wrapperClass + '"></div>')
           .css({
@@ -85,8 +94,10 @@
             'padding-top' : listPaddingTop,
             'padding-bottom' : listPaddingBottom
           });
+
         // get wrapper element
-        var lists = $wrapper.clone();
+        var $lists = $wrapper.clone();
+
         // fill each column with list elements
         for (var i = 0; i < columnCount; i++) {
           var columnMargin = i > 0 ? gapWidth : 0;
@@ -94,6 +105,7 @@
           var fromCount = parseInt((perColumnItemCount * i), 10);
           var toCount = parseInt((fromCount + perColumnItemCount), 10);
           $listItems = $listItems.slice(fromCount, toCount);
+
           $list = $('<' + tagName + '/>')
             .css({
               'display': 'block',
@@ -104,13 +116,19 @@
               'padding' : 0
             })
            .attr('class', classes);
-          //wrap lists with wrapper and uls
-          lists.append($list.append($listItems));
+
+          //wrap $lists with wrapper and uls
+          $lists.append($list.append($listItems));
        };
+
         //insert new element, remove old
-        $el.after(lists).hide().addClass(self.options.hiddenClass);
+        $el.after($lists).hide().addClass(self.options.hiddenClass);
+
+        //this seems to help IE7
+        $lists.css('display','none').css('display','block');
       });
     },
+
     setResizeHandler : function() {
       var self = this;
       $(window).on('orientationchange pageshow resize', self.waitForFinalEvent(function(e) {
@@ -121,6 +139,7 @@
         });
       })).trigger('resize');
     },
+
     waitForFinalEvent : function (func, timeout) {
       var timeoutID , timeout = timeout || 400;
       return function () {
@@ -131,22 +150,28 @@
         } , timeout );
       }
     },
+
     destroy : function ($el, callback) {
       $el.show().removeClass(this.options.hiddenClass);
       $el.next('.' + this.options.wrapperClass).remove();
+
       if (typeof callback == 'function') {
         callback.call();
       }
     },
+
     bind : function(fn, arguments, scope) {
       return function () {
         fn.apply(scope, arguments);
       };
     }
+
   };
+
   $.fn[pluginName] = function ( options ) {
     return this.each(function () {
       $.data(this, "plugin_" + pluginName, new Plugin( this, options ));
     });
   };
+
 })( jQuery, window, document );
