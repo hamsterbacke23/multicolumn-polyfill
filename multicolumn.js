@@ -1,5 +1,6 @@
 /**
- * CSS3 multicolumn polyfill for list elements for IE9, IE8, partly IE7
+ * CSS3 multicolumn polyfill for list elements for IE7-9
+ * Distributes items evenly to floating elements (regardless of heights)
  *
  * usage example:
  *  if (!Modernizr.csscolumns) {
@@ -68,6 +69,12 @@
           listPaddingBottom = $el.css('padding-bottom'),
           listPaddingTop = $el.css('padding-top'),
           $children = $el.children(self.options.childSelector);
+
+        //IE 7 reduce margin by one to make floats fit
+        if($.browser.msie && parseInt($.browser.version, 10) == 7) {
+          listMarginLeft =  listMarginLeft && Math.abs(parseInt(listMarginLeft,10)) > 0 ? parseInt(listMarginLeft, 10) - 1 : listMarginLeft;
+          listMarginRight = listMarginRight && Math.abs(parseInt(listMarginRight,10)) > 0 ? parseInt(listMarginRight, 10) - 1 : listMarginRight;
+        }
 
         // calculate vars
         var perColumnItemCount  = Math.floor( $children.length / columnCount ),
