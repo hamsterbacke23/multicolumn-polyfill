@@ -77,7 +77,7 @@
         }
 
         // calculate vars
-        var perColumnItemCount  = Math.floor( $children.length / columnCount ),
+        var perColumnItemCount  = Math.ceil( $children.length / columnCount ),
           containerWidth = $el.parent().outerWidth() - (parseInt(listPaddingLeft, 10) + parseInt(listPaddingRight,10)),
           columnWidth = (containerWidth - (gapWidth * (columnCount - 1))) / columnCount;
 
