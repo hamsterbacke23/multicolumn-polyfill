@@ -1,0 +1,14 @@
+{
+    "name": "hamsterbacke23/multicolumn-polyfill",
+    "version": "1.0.0",
+    "main": "multicolumn.js",
+    "description": "Imitates the CSS3 multicolumn effect for list items for IE",
+    "license": "MIT License",
+    "ignore": [
+        ".jshintrc",
+        "**/*.txt"
+    ],
+    "dependencies": {
+        "jquery": ">=1.9.0"
+    }
+}
