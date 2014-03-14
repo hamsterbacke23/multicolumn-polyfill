@@ -89,8 +89,9 @@
           columnWidth = Math.floor(columnWidth);
         }
 
+
         // define wrapper element
-        $wrapper = $('<div class="clearfix ' + self.options.wrapperClass + '"></div>')
+        var $wrapper = $('<div class="clearfix ' + self.options.wrapperClass + '"></div>')
           .css({
             'margin-left': listMarginLeft,
             'margin-right': listMarginRight,
@@ -113,7 +114,7 @@
           var toCount = parseInt((fromCount + perColumnItemCount), 10);
           $listItems = $listItems.slice(fromCount, toCount);
 
-          $list = $('<' + tagName + '/>')
+          var $list = $('<' + tagName + '/>')
             .css({
               'display': 'block',
               'float': 'left',
@@ -131,8 +132,10 @@
         //insert new element, remove old
         $el.after($lists).hide().addClass(self.options.hiddenClass);
 
-        //this seems to help IE7
-        $lists.css('display','none').css('display','block');
+        /* FIX: cleanup the
+         * cleanup element && eventhandlers
+         */
+        $el.remove();
       });
     },
 
@@ -141,7 +144,7 @@
       $(window).on('orientationchange pageshow resize', self.waitForFinalEvent(function(e) {
         var _self = self;
         self.element.each(function() {
-          $el = $(this);
+          var $el = $(this);
           _self.destroy($el, _self.bind(_self.doColumns, $el, _self));
         });
       })).trigger('resize');
