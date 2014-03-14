@@ -132,10 +132,11 @@
         //insert new element, remove old
         $el.after($lists).hide().addClass(self.options.hiddenClass);
 
-        /* FIX: cleanup the
+        /* FIX if there are memory leaks: cleanup the
          * cleanup element && eventhandlers
-         */
+         * Note: I this case you cannot get the element back  
         $el.remove();
+         */
       });
     },
 
