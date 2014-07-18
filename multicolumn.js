@@ -146,7 +146,7 @@
         var _self = self;
         self.element.each(function() {
           var $el = $(this);
-          _self.destroy($el, _self.bind(_self.doColumns, $el, _self));
+          _self.destroy($el, _self.bind(_self.doColumns, [$el], _self));
         });
       })).trigger('resize');
     },
@@ -171,9 +171,9 @@
       }
     },
 
-    bind : function(fn, arguments, scope) {
+    bind : function(fn, args, scope) {
       return function () {
-        fn.apply(scope, arguments);
+        fn.apply(scope, args);
       };
     }
 
