@@ -1,6 +1,6 @@
 ## What is it?
 
-This imitates the CSS3 multicolumn effect for list items for IE7-9. Use it with Modernizr.
+This imitates the CSS3 multicolumn effect for list items for IE8-9. Use it with Modernizr.
 
 ## How does it work?
 - Gets all children of an element
