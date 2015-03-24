@@ -1,5 +1,5 @@
 /**
- * CSS3 multicolumn polyfill for list elements for IE7-9
+ * CSS3 multicolumn polyfill for list elements for IE
  * Distributes items evenly to floating elements (regardless of heights)
  *
  * usage example:
