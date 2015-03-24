@@ -70,12 +70,6 @@
           listPaddingTop = $el.css('padding-top'),
           $children = $el.children(self.options.childSelector);
 
-        //IE 7 reduce margin by one to make floats fit
-        if($.browser.msie && parseInt($.browser.version, 10) == 7) {
-          listMarginLeft =  listMarginLeft && Math.abs(parseInt(listMarginLeft,10)) > 0 ? parseInt(listMarginLeft, 10) - 1 : listMarginLeft;
-          listMarginRight = listMarginRight && Math.abs(parseInt(listMarginRight,10)) > 0 ? parseInt(listMarginRight, 10) - 1 : listMarginRight;
-        }
-
         // calculate vars
         var perColumnItemCount  = Math.ceil( $children.length / columnCount ),
           containerWidth = $el.parent().outerWidth() - (parseInt(listPaddingLeft, 10) + parseInt(listPaddingRight,10)),
