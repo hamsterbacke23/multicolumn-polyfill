@@ -103,7 +103,7 @@
         // fill each column with list elements
         for (var i = 0; i < columnCount; i++) {
           var columnMargin = i > 0 ? gapWidth : 0;
-          var $listItems = $children.clone();
+          var $listItems = $children.clone(true);
           var fromCount = parseInt((perColumnItemCount * i), 10);
           var toCount = parseInt((fromCount + perColumnItemCount), 10);
           $listItems = $listItems.slice(fromCount, toCount);
