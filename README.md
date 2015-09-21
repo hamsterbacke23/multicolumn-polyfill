@@ -14,3 +14,6 @@ This imitates the CSS3 multicolumn effect for list items for IE8-9. Use it with 
    $('.mycolumn-element').multicolumn();
  }
 ```
+
+### License
+This script is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
